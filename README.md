@@ -2,6 +2,7 @@
 
 ## Illinois Team-Based Challenge Brief
 
+![App Demo](app_demo.gif)
 ### Client scenario
 
 **Client:** A school district's Digital Learning and Accessibility Office, working with an educational technology partner.
