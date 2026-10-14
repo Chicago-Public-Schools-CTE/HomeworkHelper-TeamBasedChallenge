@@ -13,25 +13,6 @@
 
 This is an authentic workplace simulation: the client expects a clear report, evidence of testing, recommended code changes, and a concise presentation that supports a go/no-go rollout decision.
 
-> **Teacher setup:** Confirm the participating district or EdTech partner and the adult industry mentor before launch. The mentor must be an accessibility, UX, QA, mobile-development, or related professional who is not the assigned classroom teacher.
-
----
-
-## Illinois TBC Alignment
-
-Illinois Team-Based Challenges include an authentic community/business problem, meaningful interaction with an adult expert mentor, pathway-specific technical competency, cross-sector essential employability competency, student collaboration, and a final product or presentation. This challenge is designed to supply evidence for each element.
-
-| TBC requirement | Evidence in this challenge |
-|---|---|
-| Authentic problem with a community or business partner | The client commissions an accessibility readiness audit before district-wide deployment. |
-| Meaningful industry-mentor interaction | Mentor kickoff, design-review feedback, and final showcase; teams document feedback and their response. |
-| Pathway-specific technical competency | Teams inspect a SwiftUI app, use accessibility tools, plan code remediation, and verify work with XCTest. |
-| Essential Employability Skill | Teams demonstrate teamwork, problem solving, professional communication, and work ethic through shared artifacts and reflection. |
-| Collaborative groups | Teams of 3–4 students use defined roles, a shared issue log, and review checkpoints. |
-| Final solution product/presentation | Accessibility Audit Report, remediation evidence/pull request or patch, verification results, and client presentation. |
-
-Use the district's approved **Illinois Information Technology Technical Competencies** and **Illinois Essential Employability Skills Framework** to select and record the exact competency identifiers assessed locally. The recommended evidence below supports an application-development, testing, usability/accessibility, and troubleshooting focus. See the [ISBE College and Career Pathway Endorsement resources](https://www.isbe.net/pathwayendorsements), [Team-Based Challenge step-by-step process](https://www.isbe.net/Documents/Career-Awareness-Career-Exp.pdf), and [Illinois PWR resources](https://www.isbe.net/pwr).
-
 ---
 
 ## Team Structure and Collaboration
@@ -53,19 +34,8 @@ Form teams of **3–4 students**. Assign one primary role per student; all team 
 - Record every mentor recommendation and state whether the team adopted, adapted, or deferred it with a reason.
 - Use respectful, professional language that centers the user impact rather than blaming a person or a disability.
 
----
-
-## Industry Mentor Touchpoints
-
-| Checkpoint | Mentor interaction | Student output |
-|---|---|---|
-| Sprint 1 — Kickoff | Mentor introduces the client context, workplace expectations, and why accessibility matters to real users. | Team charter, clarifying questions, and initial audit scope. |
-| Sprint 2 — Design Review | Teams present their highest-impact findings and proposed remediations; mentor gives actionable feedback. | Revised issue log and remediation plan with feedback response. |
-| Sprint 4 — Final Showcase | Teams present the completed audit, demonstration, verification evidence, and remaining risks to the mentor/client panel. | Final report, presentation, and individual reflection. |
-
----
-
-## Four-Phase Challenge Workflow
+-
+## Challenge Workflow
 
 ### Phase 1 — Team Formation and Discovery Audit
 
@@ -111,31 +81,9 @@ Form teams of **3–4 students**. Assign one primary role per student; all team 
 2. **Remediation Artifact** — a pull request, patch, or clearly documented code changes for the selected fixes in `ContentView.swift`.
 3. **Verification Evidence** — Accessibility Inspector results, manual test notes, and XCTest accessibility-audit results when the project has a UI-test target.
 4. **Industry Presentation** — client-ready slides or briefing with a live demonstration, mentor feedback response, and rollout recommendation.
-5. **Individual Reflection** — evidence of teamwork, problem solving, communication, and professional responsibility.
-
-### Suggested assessment evidence
-
-| Dimension | Look-fors |
-|---|---|
-| Technical competency | Accurate inspection, defensible root-cause analysis, appropriate SwiftUI remediation, and repeatable verification. |
-| Teamwork and work ethic | Clear roles, dependable follow-through, shared artifacts, and constructive peer review. |
-| Problem solving | Findings are supported by evidence; recommendations are prioritized and feasible. |
-| Professional communication | Report and presentation explain user impact, technical decisions, limitations, and mentor feedback clearly. |
 
 ---
-
-## App Overview & Core Features
-
-Homework Helper is a SwiftUI study companion with four primary functional areas:
-
-1. **Home (Dashboard):** study tips, today's overview, focus goal, and a recent voice-memo preview.
-2. **To-Do List:** assignment cards, completion and removal actions, task creation, priority sorting, and clear-all action.
-3. **Study Timer:** focus countdown, start/pause control, session settings, and audio-alert indicator.
-4. **Audio Notes:** classroom audio playback, status indicators, and upcoming-note schedule.
-
----
-
-## The Four Accessibility Lenses
+## Accessibility Lenses
 
 | Lens | Focus area | Audit questions |
 |---|---|---|
