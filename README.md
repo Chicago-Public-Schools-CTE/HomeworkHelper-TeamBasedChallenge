@@ -1,99 +1,105 @@
-# Homework Helper Accessibility Remediation Challenge
-
-## Illinois Team-Based Challenge Brief
+# Homework Helper — Accessible App Design Sprint
 
 ![App Demo](app_demo.gif)
-### Client scenario
 
-**Client:** A school district's Digital Learning and Accessibility Office, working with an educational technology partner.
+## CPS × Apple Team-Based Challenge
 
-**Business need:** Before Homework Helper is offered to all students, the client needs an accessibility compliance audit and a prioritized remediation plan. The team must evaluate the SwiftUI app against WCAG 2.2 AA-informed practices and Apple's accessibility guidance, then demonstrate and verify selected fixes.
+**Date:** October 22, 2026 · 9:45 AM – 1:10 PM
+**Location:** Truman College, 1145 W. Wilson Ave., Chicago, IL 60640
+**Pathways:** Information Technology (IT) · Manufacturing, Engineering, Technology & Trades (METT)
+**Teams:** 3–5 students per team, ~25 teams (~100 students total)
 
-**Driving question:** How can our team make Homework Helper more usable for students across Apple's accessibility categories — Vision, Hearing, Speech, Mobility, and General — while preserving the app's core study-planning experience?
+## Essential Question
 
-This is an authentic workplace simulation: the client expects a clear report, evidence of testing, recommended code changes, and a concise presentation that supports a go/no-go rollout decision.
+> Who is locked out of this app, and what will it take to let them in?
+
+## The Challenge
+
+Digital products exclude users when accessibility is omitted during design and development. Today your team will audit this pre-built Homework Helper app — which contains intentional accessibility barriers — through **one assigned accessibility lens**. You'll find where the app fails that lens, pick the barrier that matters most, and use Xcode, SwiftUI, and Xcode's built-in AI coding tools to build, prototype, test, or document a fix. Apple engineers, designers, and accessibility reviewers will mentor your team and judge your final pitch.
+
+You don't need prior coding experience — Xcode's AI agent can help generate and refactor code. Your job is to think critically about the accessibility problem, direct the tool, and verify what it gives you.
+
+### Student Learning Targets
+
+By the end of the challenge, you will be able to:
+
+- Identify a specific accessibility barrier in a digital product.
+- Explain how that barrier affects a user completing a specific task.
+- Use evidence to prioritize an improvement.
+- Use Xcode, SwiftUI, and AI tools to build, prototype, test, or document an accessibility improvement.
+- Communicate a recommendation to an authentic audience.
+- Use feedback to identify a next step for testing or improvement.
 
 ---
 
-## Team Structure and Collaboration
+## Team Roles
 
-Form teams of **3–4 students**. Assign one primary role per student; all team members contribute to the final audit, remediation decisions, and presentation.
+Every team fills four roles:
 
-| Role | Primary responsibilities | Evidence |
+| Role | Responsibility |
+|---|---|
+| Auditor | Identifies barriers in the app and records evidence in the Accessibility Audit Log. |
+| Driver | Hands-on at the keyboard — writes code, builds, prototypes, or tests the fix in Xcode and SwiftUI. |
+| Navigator | Guides without typing — directs AI prompting and testing, and calls the next step. |
+| Reporter | Organizes the recommendation and leads the team's presentation. |
+
+## Your Accessibility Lens
+
+Each team is assigned one lens for the day — it's on your Team Card. Homework Helper's planted flaws are organized around Apple's five accessibility categories:
+
+- **Vision** — blindness, low vision, color vision deficiency: VoiceOver, Dynamic Type, contrast, Display & Motion settings
+- **Hearing** — deafness, hard of hearing: captions, transcripts, visual or haptic alternatives to sound
+- **Speech** — users who can't or prefer not to speak aloud: Live Speech, Personal Voice, Vocal Shortcuts
+- **Mobility** — tremor, limited dexterity: touch targets, gesture alternatives, Switch Control, Voice Control
+- **General** — attention, memory, focus: predictable UI, plain-language errors, reduced distractions
+
+For every barrier you find within your lens, record it in the Accessibility Audit Log: the issue, where it is in the app, who's affected, what task becomes difficult or impossible, its severity (Low/Medium/High), and the evidence, test, or standard behind it. Then pick the one barrier your team will fix.
+
+---
+
+## Schedule
+
+| Time | Segment | Details |
 |---|---|---|
-| Team Lead & Project Manager | Coordinates scope, meeting notes, issue-log ownership, synthesis, deadlines, and employability reflection. | Team plan, meeting notes, completed issue log. |
-| Vision Specialist | Tests VoiceOver labels, values, traits, hints, and reading order; Dynamic Type, contrast, color independence, and Display & Motion settings (flashing, Reduce Motion). | VoiceOver test notes, screenshots, measurements, and Inspector findings. |
-| Hearing, Speech & Mobility Specialist | Tests captions/transcripts and visual or haptic alternatives to audio (Hearing); confirms actions don't require the user to speak and considers Vocal Shortcuts/Live Speech opportunities (Speech); tests touch targets, gesture alternatives, and Switch Control/Voice Control reachability (Mobility). | Audio alternative notes, touch-target measurements, and Inspector findings. |
-| SwiftUI Remediation & Verification Engineer | Traces root causes in `ContentView.swift`, implements approved fixes, and runs automated/manual verification. | Patch or pull request, XCTest/Inspector results. |
+| 9:45 – 10:00 AM | Student Check-in | Arrive and check in. |
+| 10:00 – 10:05 AM | Welcome & Seating | Seating by sprint team. |
+| 10:05 – 10:20 AM | Apple Accessibility Overview | Apple's team introduces inclusive design, innovation principles, and accessibility features. |
+| 10:20 – 10:30 AM | Challenge Launch | Sprint instructions, role claims, lens assignment. |
+| 10:30 – 10:45 AM | Accessibility Audit | Audit Homework Helper through your assigned lens; log findings. |
+| 10:45 – 11:45 AM | App Fix & AI Prototyping Sprint | Build and test a fix in Xcode/SwiftUI with AI tools; log every prompt. |
+| 11:45 AM – 12:15 PM | Lunch Break | Pizza provided. |
+| 12:15 – 1:00 PM | Team Presentations & Judging | Deliver your 90-second pitch and demo to the judge panel. |
+| 1:00 – 1:10 PM | Wrap-Up | Feedback, scores, departure. |
 
-### Collaboration protocol
+## Required Team Deliverables
 
-- Maintain one shared issue log with: issue ID, screen/feature, accessibility category, reproduction steps, user impact, severity, owner, proposed fix, verification result, and mentor feedback.
-- Hold a short stand-up at the start of each work session: completed work, next work, and blockers.
-- Use peer review before a finding is included in the final report; a second team member must reproduce it.
-- Record every mentor recommendation and state whether the team adopted, adapted, or deferred it with a reason.
-- Use respectful, professional language that centers the user impact rather than blaming a person or a disability.
+- **Accessibility Audit Log** — barriers found within your lens, severity, affected users, and evidence.
+- **AI Prompt and Testing Log** — every prompt you gave the AI, what it returned, what you tested, and what you verified before trusting it.
+- **An accessible app fix, prototype, or design specification** resolving your team's chosen barrier.
+- **A one-slide recommendation** summarizing the problem, the solution, and its impact.
+- **A 90-second technical pitch** to the judge panel.
+- **An individual reflection** from each team member.
 
--
-## Challenge Workflow
+### The 90-Second Pitch
 
-### Phase 1 — Team Formation and Discovery Audit
+Your pitch must make four things clear: the barrier, the affected user, the improvement, and the decision — what should happen next.
 
-1. Review the client scenario, create a team charter, assign roles, and meet the mentor at kickoff.
-2. Complete a feature walkthrough and run an initial Accessibility Inspector audit.
-3. Audit each screen using the five accessibility categories below.
-4. Create a shared, evidence-based issue log and select the highest-impact findings for review.
+| Time | Content |
+|---|---|
+| 0 – 20s | Name the barrier and the affected user |
+| 20 – 45s | Explain the selected improvement |
+| 45 – 65s | Demonstrate the fix or prototype |
+| 65 – 90s | State the recommendation and next step |
 
-**Phase deliverable:** Team charter, initial audit log, and mentor questions.
+### Using AI Tools in Xcode
 
-### Phase 2 — Root-Cause Analysis and Remediation Plan
+Xcode's built-in AI agent can help you generate and refactor code — never coded before? No problem. But don't trust its output blindly. Before you rely on an AI-suggested change, verify it:
 
-1. Reproduce and prioritize findings by user impact, severity, frequency, and feasibility.
-2. Trace selected findings to their likely SwiftUI implementation in `ContentView.swift`.
-3. Propose code-level fixes and acceptance criteria; identify any tradeoffs or remaining risk.
-4. Present the plan at the mentor design review and revise it from feedback.
+- Does it actually fix the barrier you identified?
+- Does it create a new barrier?
+- Can your team explain what the tool did and what you decided?
 
-**Phase deliverable:** Prioritized remediation plan with root cause, proposed fix, acceptance criteria, and mentor-feedback response.
-
-### Phase 3 — Code Remediation and Verification
-
-1. Implement the approved fixes in a branch or patch.
-2. Re-test the affected screen with VoiceOver, Dynamic Type, audio/caption alternatives, touch-target and gesture accommodations, muted audio, and Reduce Motion as applicable.
-3. Run the Accessibility Inspector audit and an automated XCTest accessibility audit where available.
-4. Have a teammate independently verify each resolved issue.
-
-**Phase deliverable:** Remediated code/pull request or patch, before-and-after evidence, and verification record.
-
-### Phase 4 — Executive Report and Client Presentation
-
-1. Prepare a concise Accessibility Audit Report for the client.
-2. Deliver a 5–8 minute presentation and live demonstration to the mentor/client panel.
-3. Explain resolved issues, deferred risks, verification results, and the recommendation for rollout.
-4. Complete an individual reflection on technical growth and Essential Employability Skills.
-
-**Phase deliverable:** Final report, presentation, demonstration, issue log, and individual reflection.
-
----
-
-## Required Final Deliverables
-
-1. **Accessibility Audit Report** — executive summary; audit scope; prioritized findings; affected users; screenshots or Inspector evidence; standards/guidance consulted; recommended actions; and residual risk.
-2. **Remediation Artifact** — a pull request, patch, or clearly documented code changes for the selected fixes in `ContentView.swift`.
-3. **Verification Evidence** — Accessibility Inspector results, manual test notes, and XCTest accessibility-audit results when the project has a UI-test target.
-4. **Industry Presentation** — client-ready slides or briefing with a live demonstration, mentor feedback response, and rollout recommendation.
-
----
-## Accessibility Categories
-
-Apple groups its accessibility features into five categories. Use them to organize the audit instead of ad hoc labels.
-
-| Category | Focus area | Audit questions |
-|---|---|---|
-| Vision | Blind, low-vision, or color-blind users — screen readers (VoiceOver), magnification, text size, color filters, invert colors, and motion cues | Can VoiceOver convey all information and actions? Does text scale with Dynamic Type? Is information distinguishable without color, with sufficient contrast? Is flashing/motion reduced when Reduce Motion is on? |
-| Hearing | Users who are deaf, hard of hearing, or want audio support — captions, subtitles, and sound alerts | Do audio cues have captions, a transcript, or a visual/haptic alternative? Are alerts perceptible while the device is muted? |
-| Speech | Users who cannot speak or prefer not to use verbal communication — Live Speech, Personal Voice, Vocal Shortcuts | Can every action be completed without requiring the user to speak aloud? Where the app could offer a spoken shortcut, is a typed or visual alternative still available? |
-| Mobility | Hands-free and adaptive navigation for physical or motor disabilities — Voice Control, Switch Control, AssistiveTouch, touch accommodations | Are touch targets at least 44×44 pt? Can actions be completed without complex or multi-step gestures? Is the UI reachable by Switch Control and Voice Control? |
-| General | Tools that simplify the experience, focus, and comprehension — Assistive Access, Guided Access, Focus, reduced distractions | Is the UI predictable? Are errors written in plain language? Are destructive actions confirmed or reversible? Are distractions minimized? |
+Log every attempt in the AI Prompt and Testing Log.
 
 ---
 
