@@ -22,3 +22,6 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# Facilitator-only answer key — never push to the public repo
+HomeworkHelper/HomeworkHelper_Flaw_Key.md
