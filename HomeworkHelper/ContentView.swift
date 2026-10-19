@@ -100,6 +100,13 @@ struct ContentView: View {
 
     @StateObject private var audioPlayer = AudioNotePlayer()
 
+    @State private var voiceNoteCaptured = false
+    @State private var handsFreeMode = false
+    @State private var questionAsked = false
+    @State private var helpRequestedID: Assignment.ID?
+    @State private var dailyCheckInDone = false
+    @State private var captionsEnabled = false
+
     private var cardBackground: Color {
         #if canImport(UIKit)
         return Color(uiColor: .secondarySystemBackground)
@@ -158,7 +165,11 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     urgentAlertBanner
 
+                    classAnnouncementBanner
+
                     tipsBanner
+
+                    dailyCheckInBanner
 
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Today's Overview")
@@ -267,6 +278,58 @@ struct ContentView: View {
         }
     }
 
+    var classAnnouncementBanner: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("Class Announcement")
+                    .font(.headline)
+                Spacer()
+                Button {
+                    playAnnouncementChime()
+                } label: {
+                    Image(systemName: "bell.fill")
+                        .foregroundStyle(.orange)
+                }
+            }
+            Text("Tap the bell to hear today's announcement from your teacher.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding()
+        .background(cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+    }
+
+    var dailyCheckInBanner: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Daily Check-In")
+                .font(.caption.bold())
+                .foregroundStyle(.purple)
+
+            Text(dailyCheckInDone ? "Thanks for checking in today!" : "Tap the mic and tell us how studying is going today.")
+                .font(.subheadline)
+
+            if !dailyCheckInDone {
+                Button {
+                    dailyCheckInDone = true
+                } label: {
+                    HStack {
+                        Image(systemName: "mic.fill")
+                        Text("Record check-in")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 8)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.purple)
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.purple.opacity(0.12))
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+    }
+
     // MARK: - Tab 1: To-Do List
 
     var todoTab: some View {
@@ -351,58 +414,74 @@ struct ContentView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 14))
             } else {
                 ForEach($assignments) { $item in
-                    HStack(spacing: 12) {
-                        Image(systemName: item.done ? "checkmark.square.fill" : "square")
-                            .font(.system(size: 16))
-                            .foregroundStyle(item.done ? .green : .gray)
-                            .onTapGesture { item.done.toggle() }
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack(spacing: 12) {
+                            Image(systemName: item.done ? "checkmark.square.fill" : "square")
+                                .font(.system(size: 16))
+                                .foregroundStyle(item.done ? .green : .gray)
+                                .onTapGesture { item.done.toggle() }
 
-                        Circle()
-                            .fill(priorityColor(item.priority))
-                            .frame(width: 10, height: 10)
+                            Circle()
+                                .fill(priorityColor(item.priority))
+                                .frame(width: 10, height: 10)
 
-                        VStack(alignment: .leading, spacing: 3) {
-                            HStack(spacing: 8) {
-                                Text(item.title)
-                                    .font(.body)
-                                    .strikethrough(item.done)
+                            VStack(alignment: .leading, spacing: 3) {
+                                HStack(spacing: 8) {
+                                    Text(item.title)
+                                        .font(.body)
+                                        .strikethrough(item.done)
 
-                                if item.priority == 1 {
-                                    Text("URGENT")
-                                        .font(.system(size: 10, weight: .bold))
-                                        .foregroundStyle(Color(red: 1.0, green: 0.88, blue: 0.2))
-                                        .padding(.horizontal, 6)
-                                        .padding(.vertical, 2)
-                                        .background(Color.white)
-                                        .clipShape(Capsule())
+                                    if item.priority == 1 {
+                                        Text("URGENT")
+                                            .font(.system(size: 10, weight: .bold))
+                                            .foregroundStyle(Color(red: 1.0, green: 0.88, blue: 0.2))
+                                            .padding(.horizontal, 6)
+                                            .padding(.vertical, 2)
+                                            .background(Color.white)
+                                            .clipShape(Capsule())
+                                    }
                                 }
+
+                                Text("\(item.course) · Due \(item.due)")
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(Color(white: 0.75))
+
+                                Text("Instructions: Make sure to read textbook pages 84-92 thoroughly, answer every review question in your notebook, and cite all sources.")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                    .frame(height: 10)
+                                    .clipped()
                             }
 
-                            Text("\(item.course) · Due \(item.due)")
-                                .font(.system(size: 11))
-                                .foregroundStyle(Color(white: 0.75))
+                            Spacer()
 
-                            Text("Instructions: Make sure to read textbook pages 84-92 thoroughly, answer every review question in your notebook, and cite all sources.")
+                            Button {
+                                helpRequestedID = item.id
+                            } label: {
+                                Image(systemName: helpRequestedID == item.id ? "mic.circle.fill" : "mic.circle")
+                                    .font(.system(size: 20))
+                                    .foregroundStyle(.blue)
+                            }
+
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 2)
+                                    .stroke(Color.red.opacity(0.6), lineWidth: 1)
+                                    .background(Color.red.opacity(0.08))
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 7, weight: .bold))
+                                    .foregroundStyle(.red)
+                            }
+                            .frame(width: 12, height: 12)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                assignments.removeAll { $0.id == item.id }
+                            }
+                        }
+
+                        if helpRequestedID == item.id {
+                            Text("Say what you need help with — a teacher will follow up.")
                                 .font(.caption2)
                                 .foregroundStyle(.secondary)
-                                .frame(height: 10)
-                                .clipped()
-                        }
-
-                        Spacer()
-
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 2)
-                                .stroke(Color.red.opacity(0.6), lineWidth: 1)
-                                .background(Color.red.opacity(0.08))
-                            Image(systemName: "xmark")
-                                .font(.system(size: 7, weight: .bold))
-                                .foregroundStyle(.red)
-                        }
-                        .frame(width: 12, height: 12)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            assignments.removeAll { $0.id == item.id }
                         }
                     }
                     .padding()
@@ -430,6 +509,22 @@ struct ContentView: View {
                         .font(.subheadline.bold())
                     TextField("e.g. Biology", text: $newCourse)
                         .textFieldStyle(.roundedBorder)
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Add a Note")
+                        .font(.subheadline.bold())
+                    Button {
+                        voiceNoteCaptured = true
+                    } label: {
+                        HStack {
+                            Image(systemName: voiceNoteCaptured ? "checkmark.circle.fill" : "mic.fill")
+                            Text(voiceNoteCaptured ? "Voice note attached" : "Hold and say your note")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                    }
+                    .buttonStyle(.bordered)
                 }
 
                 if !errorMessage.isEmpty {
@@ -494,28 +589,40 @@ struct ContentView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
 
-                        VStack(spacing: 6) {
-                            Text("Quick Controls (Green = Start, Red = Reset):")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-
-                            HStack(spacing: 24) {
-                                Circle()
-                                    .fill(Color.green)
-                                    .frame(width: 44, height: 44)
-                                    .onTapGesture {
-                                        startTimer()
-                                    }
-
-                                Circle()
-                                    .fill(Color.red)
-                                    .frame(width: 44, height: 44)
-                                    .onTapGesture {
-                                        resetTimer()
-                                    }
+                        if handsFreeMode {
+                            VStack(spacing: 6) {
+                                Image(systemName: "mic.fill")
+                                    .font(.title)
+                                    .foregroundStyle(.blue)
+                                Text("Say \"Start\" or \"Reset\" to control the timer")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
                             }
+                            .padding(.top, 4)
+                        } else {
+                            VStack(spacing: 6) {
+                                Text("Quick Controls (Green = Start, Red = Reset):")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+
+                                HStack(spacing: 24) {
+                                    Circle()
+                                        .fill(Color.green)
+                                        .frame(width: 44, height: 44)
+                                        .onTapGesture {
+                                            startTimer()
+                                        }
+
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 44, height: 44)
+                                        .onTapGesture {
+                                            resetTimer()
+                                        }
+                                }
+                            }
+                            .padding(.top, 4)
                         }
-                        .padding(.top, 4)
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 32)
@@ -541,6 +648,12 @@ struct ContentView: View {
                                 Text("Sound Chime")
                                 Spacer()
 
+                                Button {
+                                    playTimerEndSound()
+                                } label: {
+                                    Image(systemName: "speaker.wave.2.fill")
+                                }
+
                                 HStack(spacing: 12) {
                                     Circle()
                                         .fill(Color.green)
@@ -558,6 +671,13 @@ struct ContentView: View {
                                         isChimeEnabled = false
                                     }
                                 }
+                            }
+                            Divider()
+                            HStack {
+                                Text("Hands-Free Mode")
+                                Spacer()
+                                Toggle("", isOn: $handsFreeMode)
+                                    .labelsHidden()
                             }
                         }
                         .padding()
@@ -601,10 +721,42 @@ struct ContentView: View {
                         }
 
                         Spacer()
+
+                        Button {
+                            captionsEnabled.toggle()
+                        } label: {
+                            Text("CC")
+                                .font(.caption.bold())
+                                .padding(6)
+                                .background(captionsEnabled ? Color.blue : Color.gray.opacity(0.2))
+                                .foregroundStyle(captionsEnabled ? .white : .primary)
+                                .clipShape(Capsule())
+                        }
                     }
                     .padding()
                     .background(cardBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Ask About This Recording")
+                            .font(.subheadline.bold())
+                            .foregroundStyle(.secondary)
+
+                        Button {
+                            questionAsked = true
+                        } label: {
+                            HStack {
+                                Image(systemName: "mic.fill")
+                                Text(questionAsked ? "Question sent" : "Tap and say your question")
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding()
+                    .background(cardBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
 
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Upcoming Notes")
@@ -708,6 +860,14 @@ struct ContentView: View {
         NSSound.beep()
         #elseif canImport(AudioToolbox)
         AudioServicesPlaySystemSound(1005)
+        #endif
+    }
+
+    func playAnnouncementChime() {
+        #if canImport(AppKit) && !targetEnvironment(macCatalyst)
+        NSSound.beep()
+        #elseif canImport(AudioToolbox)
+        AudioServicesPlaySystemSound(1007)
         #endif
     }
 }
